@@ -1,9 +1,7 @@
 let numeri = [1, 10, 8, 21, 12];
 console.log(numeri);
-let somma = 0;
-for (let i = 0; i < numeri.length; i++) {
-	somma += numeri[i];
-  };
+let valore= 0;
+let somma =numeri.reduce((acc, cur)=> acc + cur, valore);
 console.log("La somma degli elementi è:" + somma);
 
 
