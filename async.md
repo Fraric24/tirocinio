@@ -1,8 +1,10 @@
 # Esercizio di chiamata asincrona
 ```javascript
 function getPastEvent() {
-  return new Promise((resolve) => {
+  return new Promise((resolve,reject) => {
     setTimeout(() => {
+      if (Math.random() <0.2) {
+        return reject(new Error ("Conessione instabile, impossibile recuperare l'evento."));
       const events = [
         { year: 1990, name: "World Wide Web Invented" },
         { year: 2001, name: "Wikipedia Launched" },
@@ -17,11 +19,15 @@ function getPastEvent() {
 }
 async function travelThroughHistory(n) {
   try{
-    const promises = [...Array(n)].map(()=> getPastEvent());
-    const events = await Promise.all(promises);
-    const eventounico= [...new Map(events.map (evento => [`${evento.year}- ${evento.name}`, evento]))
-    .values()].filter(evento => evento.year <2000).sort((a,b)=> a.year-b.year);
-    return eventounico;
+      const promises = [...Array(n)].map(()=> getPastEvent());
+      const events = await Promise.allSettled(promises);
+      const events = risultato
+      .filter(({status})=>status === 'fulfilled')
+      .map(({value})=>value);
+
+      const eventounico= [...new Map(events.map (evento => [`${evento.year}- ${evento.name}`, evento]))
+      .values()].filter(evento => evento.year <2000).sort((a,b)=> a.year-b.year);
+      return eventounico;
   } catch (error) {
     console.log("C'è un errore: ", error)
   }
