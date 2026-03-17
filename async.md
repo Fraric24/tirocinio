@@ -16,17 +16,21 @@ function getPastEvent() {
   });
 }
 async function travelThroughHistory(n) {
-  const promises = [...Array(n)].map(()=> getPastEvent());
-  const events = await Promise.all(promises);
-  const eventounico= [...new Map(events.map (evento => [`${evento.year}- ${evento.name}`, evento]))
-  .values()].filter(evento => evento.year <2000).sort((a,b)=> a.year-b.year);
-  return eventounico;
+  try{
+    const promises = [...Array(n)].map(()=> getPastEvent());
+    const events = await Promise.all(promises);
+    const eventounico= [...new Map(events.map (evento => [`${evento.year}- ${evento.name}`, evento]))
+    .values()].filter(evento => evento.year <2000).sort((a,b)=> a.year-b.year);
+    return eventounico;
+  } catch (error) {
+  console.log("C'è un errore: ", error)
+  }
 }
 travelThroughHistory(10)
 .then((risultati)=> {
   console.log("Lista");
   console.table(risultati);
 }) 
-.catch((error)=> {console.log("Qualcosa è andato storto:", error)
+.catch((error) => {console.log("Qualcosa è andato storto:", error)
 });
 ```
