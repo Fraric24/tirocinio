@@ -27,6 +27,6 @@ travelThroughHistory(10)
   console.log("Lista");
   console.table(risultati);
 }) 
-```
 .catch((error)=> {console.log("Qualcosa è andato storto:", error)
 });
+```
