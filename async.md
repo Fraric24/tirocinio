@@ -21,19 +21,15 @@ async function travelThroughHistory(n) {
   try{
       const promises = [...Array(n)].map(()=> getPastEvent());
       const risultato = await Promise.allSettled(promises);
-      const events = risultato
-      .filter(({status})=>status === 'fulfilled')
-      .map(({value})=>value);
+      const events = risultato.filter(({status})=>status === 'fulfilled').map(({value})=>value);
 
-      const eventounico= [...new Map(events.map (evento => [`${evento.year}- ${evento.name}`, evento]))
-      .values()].filter(evento => evento.year <2000).sort((a,b)=> a.year-b.year);
+      const eventounico= [...new Map(events.map (evento => [`${evento.year}- ${evento.name}`, evento])).values()].filter(evento => evento.year <2000).sort((a,b)=> a.year-b.year);
       return eventounico;
   } catch (error) {
     console.log("C'è un errore: ", error)
   }
 }
-travelThroughHistory(10)
-.then((risultati)=> {
+travelThroughHistory(10).then((risultati)=> {
   console.log("Lista");
   console.table(risultati);
 }) 
