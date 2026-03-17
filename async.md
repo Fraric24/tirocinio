@@ -23,7 +23,7 @@ async function travelThroughHistory(n) {
     .values()].filter(evento => evento.year <2000).sort((a,b)=> a.year-b.year);
     return eventounico;
   } catch (error) {
-  console.log("C'è un errore: ", error)
+    console.log("C'è un errore: ", error)
   }
 }
 travelThroughHistory(10)
