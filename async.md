@@ -20,7 +20,7 @@ function getPastEvent() {
 async function travelThroughHistory(n) {
   try{
       const promises = [...Array(n)].map(()=> getPastEvent());
-      const events = await Promise.allSettled(promises);
+      const risultato = await Promise.allSettled(promises);
       const events = risultato
       .filter(({status})=>status === 'fulfilled')
       .map(({value})=>value);
