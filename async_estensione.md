@@ -124,8 +124,8 @@ async function travelThroughHistory() {
     }
     return eventi.sort((a,b)=> a.year - b.year);
 }
-travelThroughHistory().then(risultati=> {
+travelThroughHistory().then(eventi=> {
   console.log("Lista");
-  console.table(risultati);
+  console.table(eventi);
 });
 ```
