@@ -114,9 +114,16 @@ async function travelThroughHistory() {
     while (unici.size < lunghezza){
         try{
             const evento= await getPastEvent();
-            if (!unici.has(evento.year)){
-            unici.add(evento.year); eventi.push(evento);
-            console.log(`recuperati: ${unici.size}/${lunghezza}`);
+            let giapresente= false;
+            for (let i=0; i<eventi.length; i++){
+                if (eventi[i].year === evento.year){
+                    giapresente= true;
+                    break;
+                }
+            }
+            if (giapresente === false){
+                eventi.push(evento);
+                console.log("Recuperati: " + eventi.length + "/" + lunghezza);
             }
         } catch (error) {
             console.log("C'è un errore: ", error)
