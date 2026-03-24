@@ -5,6 +5,7 @@ function getPastEvent() {
     setTimeout(() => {
       if (Math.random() <0.2) {
         return reject(new Error ("Conessione instabile, impossibile recuperare l'evento."));
+  }
       const events = [
         { year: 1990, name: "World Wide Web Invented" },
         { year: 2001, name: "Wikipedia Launched" },
