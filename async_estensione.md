@@ -108,24 +108,22 @@ function getPastEvent() {
   });
 }
 async function travelThroughHistory() {
-    let eventi= [];
-    let unici= new Set();
-    const lunghezza= 95;
-    while (unici.size < lunghezza){
-        try{
-            const evento= await getPastEvent();
-            let giapresente= false;
-            for (let i=0; i<eventi.length; i++){
-                if (eventi[i].year === evento.year){
-                    giapresente= true;
-                    break;
-                }
+    let eventi = [];
+    const lunghezza = 95;
+    while (eventi.length < lunghezza) {
+        try {
+            const evento = await getPastEvent();
+            let unici = eventi.filter(elemento => elemento?.year === evento.year);
+            let giapresente = false;
+            if (unici.length > 0) {
+                giapresente = true;
             }
             if (giapresente === false){
                 eventi.push(evento);
                 console.log("Recuperati: " + eventi.length + "/" + lunghezza);
             }
-        } catch (error) {
+        }
+        catch (error) {
             console.log("C'è un errore: ", error)
         }
     }
